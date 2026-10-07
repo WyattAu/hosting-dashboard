@@ -1,0 +1,10 @@
+---
+import Base from "../layouts/Base.astro";
+import TenantList from "../components/TenantList";
+import JobList from "../components/JobList";
+---
+
+<Base title="WyattAu Hosting">
+  <TenantList client:load />
+  <JobList client:load />
+</Base>

@@ -1,0 +1,33 @@
+---
+import "../styles/global.css";
+
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>{title}</h1>
+        <p class="muted">
+          User authentication is enforced by the edge proxy in front of this
+          service. All platform secrets stay server-side.
+        </p>
+      </header>
+      <main>
+        <slot />
+      </main>
+    </div>
+  </body>
+</html>

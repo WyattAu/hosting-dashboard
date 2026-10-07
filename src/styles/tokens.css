@@ -1,0 +1,36 @@
+/*
+ * Design tokens — derived from pediment's Spatial Materialism system.
+ * (github.com/WyattAu/pediment, Apache-2.0/MIT)
+ *
+ * Vendored for v0 because pediment is a workspace monorepo not yet
+ * published to npm. When @wyattau/tokens lands, replace this file with
+ * `@import "@wyattau/tokens/spatial-materialism.css"`. Tracked in the SIS
+ * engineering loop, iteration 3.
+ */
+
+@theme {
+  /* Palette — midnight-navy base */
+  --color-bg: #0a0e1a;
+  --color-surface: #111827;
+  --color-surface-raised: #1a2332;
+  --color-border: #2a3648;
+  --color-text: #e5ecf5;
+  --color-text-muted: #8b9bb4;
+  --color-accent: #00e5ff;
+  --color-ok: #34d399;
+  --color-warn: #fbbf24;
+  --color-danger: #f87171;
+
+  /* Elevation (single light source, top-left) */
+  --shadow-elevation-1:
+    0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+  --shadow-elevation-2:
+    0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
+
+  /* Fluid spacing */
+  --space-fluid-sm: clamp(0.5rem, 1vw, 1rem);
+  --space-fluid-md: clamp(1rem, 2vw, 2rem);
+
+  /* Max width */
+  --max-width: 1200px;
+}

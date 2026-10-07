@@ -1,0 +1,26 @@
+{
+  "name": "hosting-dashboard",
+  "version": "0.1.0",
+  "description": "Customer dashboard for the WyattAu hosting platform — tenants, backup jobs, health.",
+  "type": "module",
+  "license": "Apache-2.0",
+  "author": "Wyatt Au <wyatt_au@protonmail.com>",
+  "repository": "github:WyattAu/hosting-dashboard",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check"
+  },
+  "dependencies": {
+    "@astrojs/node": "^11.1.7",
+    "@astrojs/solid-js": "^7.0.2",
+    "astro": "^7.3.5",
+    "solid-js": "^1.9.15"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.10",
+    "@types/node": "^26.6.4",
+    "typescript": "^7.0.2"
+  }
+}
