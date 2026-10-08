@@ -1,4 +1,4 @@
-import { createResource, createSignal, For, Show } from "solid-js";
+import { createResource, createSignal, onCleanup, For, Show } from "solid-js";
 import type { JobRecord } from "../lib/hosting-api";
 
 interface JobView extends JobRecord {
@@ -12,8 +12,16 @@ async function fetchJobs(): Promise<JobView[]> {
   return jobs.map((j, i) => ({ ...j, key: `${j.id}-${i}` }));
 }
 
+const POLL_MS = 30_000;
+
 export default function JobList() {
   const [jobs, { refetch }] = createResource<JobView[]>(fetchJobs);
+  // Pending/running jobs resolve server-side — poll so the UI converges
+  // without manual refresh; cheap at dashboard scale.
+  const timer = setInterval(() => {
+    if (!jobs.loading) refetch();
+  }, POLL_MS);
+  onCleanup(() => clearInterval(timer));
   const [busy, setBusy] = createSignal(false);
   const [notice, setNotice] = createSignal<string | null>(null);
 

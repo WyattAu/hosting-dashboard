@@ -1,4 +1,4 @@
-import { createResource, For, Show, createSignal } from "solid-js";
+import { createResource, For, Show, createSignal, onCleanup } from "solid-js";
 import type { Tenant } from "../lib/hosting-api";
 
 async function fetchTenants(): Promise<Tenant[]> {
@@ -7,8 +7,14 @@ async function fetchTenants(): Promise<Tenant[]> {
   return (await res.json()) as Tenant[];
 }
 
+const POLL_MS = 60_000;
+
 export default function TenantList() {
   const [tenants, { refetch }] = createResource<Tenant[]>(fetchTenants);
+  const timer = setInterval(() => {
+    if (!tenants.loading) refetch();
+  }, POLL_MS);
+  onCleanup(() => clearInterval(timer));
   const [error, setError] = createSignal<string | null>(null);
 
   return (
