@@ -1,5 +1,6 @@
 import { createSignal, Show } from "solid-js";
 import { loginPasskey, registerPasskey } from "../lib/webauthn";
+import { passkeySession, setPasskeySession } from "../lib/session";
 
 /**
  * Passkey setup + login island.
@@ -12,9 +13,7 @@ import { loginPasskey, registerPasskey } from "../lib/webauthn";
  */
 export default function PasskeySetup() {
   const [username, setUsername] = createSignal("");
-  const [session, setSession] = createSignal<string | null>(
-    sessionStorage.getItem("pk-session"),
-  );
+  const session = passkeySession;
   const [message, setMessage] = createSignal<string | null>(null);
   const [busy, setBusy] = createSignal(false);
 
@@ -43,8 +42,7 @@ export default function PasskeySetup() {
   const doLogin = () =>
     run(async () => {
       const result = await loginPasskey(username());
-      sessionStorage.setItem("pk-session", result.session);
-      setSession(result.session);
+      setPasskeySession(result.session);
       setMessage(`Signed in as ${result.username}.`);
     });
 
@@ -58,8 +56,7 @@ export default function PasskeySetup() {
             Session active.{" "}
             <button
               onClick={() => {
-                sessionStorage.removeItem("pk-session");
-                setSession(null);
+                setPasskeySession(null);
               }}
             >
               Sign out

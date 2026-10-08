@@ -1,5 +1,6 @@
 import { createResource, createSignal, onCleanup, For, Show } from "solid-js";
 import type { JobRecord } from "../lib/hosting-api";
+import { passkeySession } from "../lib/session";
 
 interface JobView extends JobRecord {
   key: string;
@@ -62,6 +63,16 @@ export default function JobList() {
         </button>
       </h2>
 
+      <Show
+        when={passkeySession()}
+        fallback={
+          <p class="muted">
+            Read-only view. Sign in with a passkey on the{" "}
+            <a href="/login" style={{ color: "var(--color-accent)" }}>login page</a> to
+            trigger backups.
+          </p>
+        }
+      >
       <form
         style={{ "margin-block-end": "1rem", display: "flex", gap: "0.75rem", "align-items": "center" }}
         onSubmit={(e) => {
@@ -90,6 +101,7 @@ export default function JobList() {
           {busy() ? "Queueing…" : "Trigger backup"}
         </button>
       </form>
+      </Show>
       <Show when={notice()}>
         <p class="muted">{notice()}</p>
       </Show>
