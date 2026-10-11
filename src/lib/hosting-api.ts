@@ -12,6 +12,7 @@ const BASE = process.env.HOSTING_API_URL ?? "http://127.0.0.1:8484";
 const TOKEN = process.env.HOSTING_API_TOKEN ?? "";
 
 export interface TenantStatus {
+  suspended: boolean;
   services: number;
   up: number;
   degraded: number;

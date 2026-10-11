@@ -45,18 +45,22 @@ export default function TenantList() {
                   <td>
                     <span
                       class={`status-pill ${
-                        t.status.healthy
-                          ? "status-healthy"
-                          : t.status.up > 0
-                            ? "status-down"
-                            : "status-degraded"
+                        t.status.suspended
+                          ? "status-suspended"
+                          : t.status.healthy
+                            ? "status-healthy"
+                            : t.status.up > 0
+                              ? "status-down"
+                              : "status-degraded"
                       }`}
                     >
-                      {t.status.healthy
-                        ? "healthy"
-                        : t.status.up > 0
-                          ? `${t.status.degraded} degraded`
-                          : "down"}
+                      {t.status.suspended
+                        ? "suspended"
+                        : t.status.healthy
+                          ? "healthy"
+                          : t.status.up > 0
+                            ? `${t.status.degraded} degraded`
+                            : "down"}
                     </span>
                   </td>
                 </tr>
