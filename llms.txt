@@ -1,0 +1,6 @@
+# hosting-dashboard
+
+> Customer dashboard for the hosting platform: tenants, backup jobs, health. Astro + SolidJS; dogfoods pediment.
+
+- [README](README.md): behavior, usage, scope
+- [AGENTS](AGENTS.md): contract + truth table (one normative home per concern)

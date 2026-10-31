@@ -7,7 +7,7 @@ tenant health and backup jobs, backed by
 Astro 7 + SolidJS 1.9 islands. Design tokens derive from
 [`pediment`](https://github.com/WyattAu/pediment)'s Spatial Materialism
 system (vendored in `src/styles/tokens.css` until pediment publishes to
-npm — then this becomes a one-line `@import` swap).
+npm; then this becomes a one-line `@import` swap).
 
 ## Security model
 
@@ -18,7 +18,7 @@ browser ──► edge proxy (TLS + oauth2-proxy user auth)
                                 ▲ HOSTING_API_TOKEN lives HERE only
 ```
 
-- The browser never sees `HOSTING_API_TOKEN` — server routes inject it.
+- The browser never sees `HOSTING_API_TOKEN`; server routes inject it.
 - User authentication is delegated entirely to the edge proxy.
 - The backup-trigger route additionally validates the tenant slug before
   forwarding (defence in depth; hosting-api validates again).
@@ -29,7 +29,7 @@ browser ──► edge proxy (TLS + oauth2-proxy user auth)
 bun install
 HOSTING_API_URL=http://127.0.0.1:8484 HOSTING_API_TOKEN=dev-token bun run dev
 bun run build          # server build (node adapter) into dist/
-tsc -p . --noEmit      # typecheck (astro check hangs under bun — tracked)
+tsc -p . --noEmit      # typecheck (astro check hangs under bun; tracked)
 ```
 
 ## Deployment
