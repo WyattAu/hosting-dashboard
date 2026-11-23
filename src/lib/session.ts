@@ -6,7 +6,13 @@ import { createSignal } from "solid-js";
  * this only drives UI gating (read-only vs. mutating controls).
  */
 const KEY = "pk-session";
-const [session, setSession] = createSignal<string | null>(sessionStorage.getItem(KEY));
+// SSR guard: this module is also evaluated on the server during prerender
+// (found 2026-11-23: every route 500'd with "sessionStorage is not
+// defined" once the artifact ran under node — dev mode never caught it
+// because only the client entry executed this path).
+const [session, setSession] = createSignal<string | null>(
+  typeof sessionStorage === "undefined" ? null : sessionStorage.getItem(KEY),
+);
 
 export function setPasskeySession(token: string | null): void {
   if (token) {
